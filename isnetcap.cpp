@@ -22,6 +22,7 @@ int wmain()
         std::cout << "argc is: " << __argc << std::endl;
         return 0;
     }
+
     ULONG status = ERROR_SUCCESS;
     EVENT_TRACE_LOGFILE logfile;
     TRACE_LOGFILE_HEADER* pHeader = &logfile.LogfileHeader;
@@ -80,7 +81,7 @@ VOID WINAPI EventRecordCallback(  _In_ PEVENT_RECORD  pEvent)
     if (g_processedevents > g_maxevents)
     {
         g_overflow = true;
-        g_ispacketcapture = true;
+        g_ispacketcapture = true; // this is set  to  true when  we  hit the max number  of  events  to be  parsed , only  to  indicated  stop processing the file  further inside buffercallback, 
     }
 }
 
