@@ -1,6 +1,3 @@
-// isnetcap.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
 #include <Windows.h>
 #include <evntrace.h>
@@ -11,6 +8,7 @@ int g_maxevents = 10000; // number  of  event we   process max.  from the etl fi
 int g_processedevents = 0;  // number of  already processed  events 
 bool g_ispacketcapture = false;  // true  when  we  detect  events  from  ndiscap
 bool g_overflow = false; // true  when  we  hit  the maximum number  of  events  to parse  as  defined by g_maxevents
+// event processing callbacks:
 VOID WINAPI EventRecordCallback(_In_ PEVENT_RECORD pEvent);  
 ULONG WINAPI BufferCallback(_In_ PEVENT_TRACE_LOGFILE Buffer);
 
@@ -27,7 +25,6 @@ int wmain()
     EVENT_TRACE_LOGFILE logfile;
     TRACE_LOGFILE_HEADER* pHeader = &logfile.LogfileHeader;
     TRACEHANDLE hTrace = 0;
-    HRESULT hr = S_OK;
     ZeroMemory(&logfile, sizeof(EVENT_TRACE_LOGFILE));
     logfile.BufferCallback = BufferCallback;
     logfile.EventRecordCallback = EventRecordCallback;
@@ -85,12 +82,10 @@ VOID WINAPI EventRecordCallback(  _In_ PEVENT_RECORD  pEvent)
     }
 }
 
-
 ULONG WINAPI BufferCallback(
     _In_ PEVENT_TRACE_LOGFILE Buffer
 )
 {
- 
     if (g_ispacketcapture == false)
     {
         return true;
