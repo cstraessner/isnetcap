@@ -7,11 +7,11 @@
 #include <evntcons.h>
     // Microsoft-Windows-NDIS-PacketCapture
     // 2ED6006E-4729-4609-B423-3EE7BCD678EF
-int g_maxevents = 10000;
-int g_processedevents = 0;
-bool g_ispacketcapture = false;
-bool g_overflow = false;
-VOID WINAPI EventRecordCallback(_In_ PEVENT_RECORD pEvent);
+int g_maxevents = 10000; // number  of  event we   process max.  from the etl file
+int g_processedevents = 0;  // number of  already processed  events 
+bool g_ispacketcapture = false;  // true  when  we  detect  events  from  ndiscap
+bool g_overflow = false; // true  when  we  hit  the maximum number  of  events  to parse  as  defined by g_maxevents
+VOID WINAPI EventRecordCallback(_In_ PEVENT_RECORD pEvent);  
 ULONG WINAPI BufferCallback(_In_ PEVENT_TRACE_LOGFILE Buffer);
 
 int wmain()
