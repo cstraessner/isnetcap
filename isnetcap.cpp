@@ -2,6 +2,10 @@
 #include <Windows.h>
 #include <evntrace.h>
 #include <evntcons.h>
+
+//Purpose of this tool is  to check  if  a.etl trace file contains  event  from Microsoft - Windows - NDIS - PacketCapture(network capture packets)
+//if  the trace file given contains  such events, it  can be  further processed  into pcap format.
+
     // Microsoft-Windows-NDIS-PacketCapture
     // 2ED6006E-4729-4609-B423-3EE7BCD678EF
 int g_maxevents = 50000; // number  of  event we   process max.  from the etl file
