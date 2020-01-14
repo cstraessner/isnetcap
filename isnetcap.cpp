@@ -4,7 +4,7 @@
 #include <evntcons.h>
     // Microsoft-Windows-NDIS-PacketCapture
     // 2ED6006E-4729-4609-B423-3EE7BCD678EF
-int g_maxevents = 10000; // number  of  event we   process max.  from the etl file
+int g_maxevents = 50000; // number  of  event we   process max.  from the etl file
 int g_processedevents = 0;  // number of  already processed  events 
 bool g_ispacketcapture = false;  // true  when  we  detect  events  from  ndiscap
 bool g_overflow = false; // true  when  we  hit  the maximum number  of  events  to parse  as  defined by g_maxevents
@@ -20,7 +20,7 @@ int wmain()
         std::cout << "argc is: " << __argc << std::endl;
         return 0;
     }
-
+    
     ULONG status = ERROR_SUCCESS;
     EVENT_TRACE_LOGFILE logfile;
     TRACE_LOGFILE_HEADER* pHeader = &logfile.LogfileHeader;
@@ -48,7 +48,8 @@ int wmain()
 
     if (g_ispacketcapture == true && g_overflow == false)
     {
-        std::wcout << "this trace  contains network packets: " << logname << std::endl;
+        std::wcout << "this trace  contains network packets: " << logname;
+        std::wcout << "first captured  packet seen in event: " << g_processedevents   << std::endl;
         return 3;
         
     }
